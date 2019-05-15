@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<style type="text/css">
+		#map {
+			background-image: url("us.jpg");
+			width: 900px;
+			height: 700px;
+		}
+		.player {
+			position: absolute;
+			background-image: url("player_custom.png");
+			width: 130px;
+			height: 90px;
+			background-size:contain;
+		}
+		.enemy {
+			position: absolute;
+			background-image: url("enemy-custom.png");
+			background-size: cover;
+			transform: rotate(180deg);
+			width: 100px;
+			height: 100px;
+		}
+	</style>
+	<div id="map">
+		<div id="players"></div>
+		<div id="enemies"></div>
+
+	</div>
+
+
+
+
+	<script type="text/javascript">
+	
+		var player = {left: 400, top: 500}
+		var enemies = [
+			{left: 300, top: 200},
+			{left: 400, top: 120},
+			{left: 230, top: 100},
+			{left: 100, top: 120},
+
+		]
+
+		function drawPlayer() {
+			var content = "";
+			content = `<div class=player style='left: ${player.left}px; top: ${player.top}px'></div>`
+			document.getElementById('players').innerHTML = content;
+		}
+
+		function drawEnemies() {
+			var content = "";
+			for (var i = 0; i < enemies.length; i++) {
+				content += `<div class=enemy style='left: ${enemies[i].left}px; top: ${enemies[i].top}px'></div>`
+			}
+			document.getElementById('enemies').innerHTML = content;
+		}
+
+		drawEnemies()
+
+		drawPlayer()
+
+		document.onkeydown = function(e) {
+			if (e.keyCode == 37 && player.left >= 10) { //LEFT
+				// console.log(player.left)
+				player.left -= 10
+			} else if (e.keyCode == 39 && player.left <= 830) { //RIGHT
+				//console.log(player.left)
+				player.left += 10
+			} else if (e.keyCode == 38 && player.top >= 500) { // TOP
+				console.log(player.top)
+				player.top -= 10
+				//console.log(e)
+			} else if (e.keyCode == 40 && player.top <= 620) { //DOWN
+				player.top += 10
+				console.log(player.top)
+			}
+			drawPlayer()
+		}
+	</script>
+</body>
+</html>
